@@ -22,7 +22,7 @@ jobs:
         oidcToken=$(echo $resp | jq -r .value)
         
         echo "$resp"
-        curl -X POST -H "Authorization: Bearer $oidcToken" -d '{ "sshUser": "fhammerl" }' https://actions-ssh-poc.githubapp.com/tunnel
+        curl -X POST -H "Authorization: Bearer $oidcToken" -d '{ "sshUser": "fhammerl" }' https://actions-ssh-poc.githubapp.com/tunnel -v
         resp=$(curl -X POST -H "Authorization: Bearer $oidcToken" -d '{ "sshUser": "fhammerl" }' https://actions-ssh-poc.githubapp.com/tunnel 2> /dev/null)
         echo "$resp"
         tunnelId=$(echo $resp | jq -r .tunnelId)
