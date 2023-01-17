@@ -32,6 +32,9 @@ jobs:
     - name: Connect to SSH
       shell: bash
       run: |
+        echo ${SSH_ACCESS_TOKEN:0:3}
+        echo ${SSH_TUNNEL_NAME:0:3}
+        echo ${SSH_SHARD:0:3}
         touch tunnelout
         ~/bin/devtunnel host --access-token $SSH_ACCESS_TOKEN $SSH_TUNNEL_NAME.$SSH_SHARD > tunnelout &
         pid=$!
