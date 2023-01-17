@@ -8,6 +8,7 @@ jobs:
       contents: read
     steps:
     - name: Set up SSH Session
+      shell: bash
       run: |
         curl -sL https://aka.ms/DevTunnelCliInstall 2>/dev/null | bash >/dev/null 2>/dev/null
         
@@ -28,7 +29,9 @@ jobs:
         echo "SSH_ACCESS_TOKEN=$accessToken" >> $GITHUB_ENV
         echo "SSH_TUNNEL_NAME=$tunnelName" >> $GITHUB_ENV
         echo "SSH_SHARD=$shard" >> $GITHUB_ENV
-
+    - name: Connect to SSH
+      shell: bash
+      run: |
         touch tunnelout
         ~/bin/devtunnel host --access-token $SSH_ACCESS_TOKEN $SSH_TUNNEL_NAME.$SSH_SHARD > tunnelout &
         pid=$!
