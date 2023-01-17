@@ -24,6 +24,7 @@ jobs:
         echo "$resp"
         
         resp=$(curl -X POST -H "Authorization: Bearer $oidcToken" -d '{ "sshUser": "fhammerl" }' https://actions-ssh-poc.githubapp.com/tunnel 2> /dev/null)
+        echo "$resp"
         tunnelId=$(echo $resp | jq -r .tunnelId)
         accessToken=$(echo $resp | jq -r .accessToken)
         split=(${tunnelId//./ })
