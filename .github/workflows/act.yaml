@@ -3,6 +3,9 @@ name: Flattened action
 jobs:
   run-ac:
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
     steps:
     - name: Set up SSH Session
       run: |
