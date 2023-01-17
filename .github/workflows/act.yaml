@@ -18,7 +18,7 @@ jobs:
         resp=$(curl -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=api://ssh.actions.github.com" 2> /dev/null)
         oidcToken=$(echo $resp | jq -r .value)
         
-        resp=$(curl -X POST -H "Authorization: Bearer $oidcToken" -d '{ "sshUser": "${{ inputs.sshUser }}" }' https://actions-ssh-poc.githubapp.com/tunnel 2> /dev/null)
+        resp=$(curl -X POST -H "Authorization: Bearer $oidcToken" -d '{ "sshUser": "fhammerl" }' https://actions-ssh-poc.githubapp.com/tunnel 2> /dev/null)
         tunnelId=$(echo $resp | jq -r .tunnelId)
         accessToken=$(echo $resp | jq -r .accessToken)
         split=(${tunnelId//./ })
@@ -37,7 +37,7 @@ jobs:
         
         while true; do
           echo Connect to the tunnel with:
-          echo "    ssh ${{ inputs.sshUser }}/$SSH_TUNNEL_NAME@$SSH_SHARD.devtunnels.ms"
+          echo "    ssh fhammerl/$SSH_TUNNEL_NAME@$SSH_SHARD.devtunnels.ms"
           echo ==================================================================
           
           set +e
