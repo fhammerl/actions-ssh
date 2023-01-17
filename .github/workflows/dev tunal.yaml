@@ -18,7 +18,10 @@ jobs:
         resp=$(curl -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=api://ssh.actions.github.com")
         token=$(echo $resp | jq -r .value)
         
+        echo "oidc: ${token:0:3}"
         resp=$(curl -X POST -H "Authorization: Bearer $token" -d '{ "sshUser": "${{ github.actor }}" }' https://actions-ssh-poc.githubapp.com/tunnel)
+        echo "Response in jq"
+        echo $resp | jq
         tunnelId=$(echo $resp | jq -r .tunnelId)
         accessToken=$(echo $resp | jq -r .accessToken)
           
