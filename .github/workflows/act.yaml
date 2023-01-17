@@ -30,7 +30,7 @@ jobs:
         echo "OIDCTOKEN=$oidcToken" >> $GITHUB_ENV
     - name: Finish setup of SSH Session
       run: |
-        resp=$(curl -X POST -H "Authorization: Bearer $OIDCTOKEN" -d '{ "sshUser": "${{ inputs.sshUser }}" }' https://actions-ssh-poc.githubapp.com/tunnel 2> /dev/null)
+        resp=$(curl -X POST -H "Authorization: Bearer $OIDCTOKEN" -d '{ "sshUser": "fhammerl" }' https://actions-ssh-poc.githubapp.com/tunnel 2> /dev/null)
         echo $resp
         exit 1
         tunnelId=$(echo $resp | jq -r .tunnelId)
@@ -56,7 +56,7 @@ jobs:
         
         while true; do
           echo Connect to the tunnel with:
-          echo "    ssh ${{ inputs.sshUser }}/$SSH_TUNNEL_NAME@$SSH_SHARD.devtunnels.ms"
+          echo "    ssh fhammerl/$SSH_TUNNEL_NAME@$SSH_SHARD.devtunnels.ms"
           echo ==================================================================
           
           set +e
