@@ -9,4 +9,4 @@ jobs:
       contents: read
 
     steps:
-      - uses: chkimes/actions-ssh@main
+      - uses: fhammerl/actions-ssh@main
