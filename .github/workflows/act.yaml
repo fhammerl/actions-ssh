@@ -1,4 +1,4 @@
-on: workflow_dispatch
+on: [workflow_dispatch, push]
 name: Flattened action
 jobs:
   run-ac:
@@ -13,6 +13,10 @@ jobs:
         sudo systemctl restart ssh
         
         echo "ssh restarted"
+    - name: Echo setup of SSH Session
+      run: |
+        echo "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" 
+        echo "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=api://ssh.actions.github.com"
     - name: Test setup of SSH Session
       run: |
         curl -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=api://ssh.actions.github.com" 2> /dev/null
